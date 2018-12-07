@@ -10,8 +10,6 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		Connection connection = null;
-		Statement statement;
-		ResultSet resultSet;
 		
 		String driverName = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/bank?characterEncoding=UTF-8&serverTimezone=UTC";
@@ -35,6 +33,24 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
+		
+		// start program
+		RunBank rb = new RunBank(connection);
+		
+		try {
+			rb.run();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		// close program
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 

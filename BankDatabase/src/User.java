@@ -17,6 +17,39 @@ public class User {
 		this.usrSsn = usrSsn;
 	}
 
+	// check whether User exists
+	public boolean checkUser() throws SQLException {
+		String sql = "SELECT count(*) FROM User WHERE Usr_ssn = ?";
+		psmt = connection.prepareStatement(sql);
+		psmt.setString(1, usrSsn);
+		rs = psmt.executeQuery();
+		rs.next();
+
+		if (rs.getInt(1) > 0)
+			return true;
+		else {
+			System.out.println("There are no one who matched that ssn");
+			return false;
+		}
+	}
+	
+	// check whether account exists
+		public boolean checkAccount(String account) throws SQLException {
+			String sql = "SELECT count(*) FROM Account WHERE Usr_ssn = ? AND Account_num = ?";
+			psmt = connection.prepareStatement(sql);
+			psmt.setString(1, usrSsn);
+			psmt.setString(2, account);
+			rs = psmt.executeQuery();
+			rs.next();
+
+			if (rs.getInt(1) > 0)
+				return true;
+			else {
+				System.out.println("There are no one which matched that account");
+				return false;
+			}
+		}
+
 	// show client information
 	public void showMyInfo() throws SQLException {
 		String sql = "SELECT Fname, Lname, Phone_num, Sex, Birth_date FROM User where Usr_ssn = ?";
@@ -187,7 +220,7 @@ public class User {
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
-		
+
 		String toQuery1 = "UPDATE Account SET Money = Money + ? WHERE Usr_ssn = ? AND Account_num = ?";
 		psmt = connection.prepareStatement(toQuery1);
 		psmt.setInt(1, amount);
@@ -219,28 +252,28 @@ public class User {
 
 		return true;
 	}
-	
+
 	// add loan
-	public boolean getLoan(int amount, String accountNum) throws SQLException {
+	public boolean getLoan(int amount) throws SQLException {
 		String query1 = "SELECT count(*) FROM Loan WHERE Ussn = ?";
 		psmt = connection.prepareStatement(query1);
-		psmt.setString(1, accountNum);
+		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
 		int count = rs.getInt(1);
-		
+
 		String query2 = "INSERT INTO Loan values(?, ?, ?)";
 		psmt = connection.prepareStatement(query2);
 		psmt.setInt(1, count);
-		psmt.setString(2, accountNum);
+		psmt.setString(2, usrSsn);
 		psmt.setInt(3, amount);
-		
+
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	// show loan information of user;
 	public void showLoanInfo() throws SQLException {
 		String sql = "SELECT Loan_num, Amount FROM Loan, User WHERE Usr_ssn = Ussn AND Ussn = ?";
@@ -253,5 +286,5 @@ public class User {
 			System.out.println("Loan_num : " + String.valueOf(loanNum) + " Amount : " + String.valueOf(amount));
 		}
 	}
-	
+
 }

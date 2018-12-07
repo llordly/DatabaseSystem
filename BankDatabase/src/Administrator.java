@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class Administrator {
 	private Connection connection;
 	private String admSsn;
-	
+
 	private PreparedStatement psmt;
 	private Statement stmt;
 	private ResultSet rs;
@@ -20,6 +20,40 @@ public class Administrator {
 		this.admSsn = admSsn;
 	}
 
+	// check whether administrator exists
+	public boolean checkAdmin() throws SQLException {
+		String sql = "SELECT count(*) FROM Administrator WHERE Adm_ssn = ?";
+		psmt = connection.prepareStatement(sql);
+		psmt.setString(1, admSsn);
+		rs = psmt.executeQuery();
+		rs.next();
+
+		if (rs.getInt(1) > 0)
+			return true;
+		else {
+			System.out.println("There are no one who matched that ssn");
+			return false;
+		}
+			
+	}
+
+	// check whether account exists
+	public boolean checkAccount(String account) throws SQLException {
+		String sql = "SELECT count(*) FROM Account WHERE Adm_ssn = ? AND Account_num = ?";
+		psmt = connection.prepareStatement(sql);
+		psmt.setString(1, admSsn);
+		psmt.setString(2, account);
+		rs = psmt.executeQuery();
+		rs.next();
+
+		if (rs.getInt(1) > 0)
+			return true;
+		else {
+			System.out.println("There are no one which matched that account");
+			return false;
+		}
+	}
+	
 	// print adiministrator's branch information
 	public void printBranchInfo() throws SQLException {
 		String sql = "SELECT Branch_name, Address FROM Branch, Administrator WHERE Branch_num = Bnum AND Adm_ssn = ?";
@@ -34,10 +68,10 @@ public class Administrator {
 	}
 
 	// delete client's account
-	public boolean deleteAccount(String usrSsn) throws SQLException {
-		String sql = "DELETE FROM Account where Usr_ssn = ?";
+	public boolean deleteAccount(String usrAccount) throws SQLException {
+		String sql = "DELETE FROM Account where Account_num = ?";
 		psmt = connection.prepareStatement(sql);
-		psmt.setString(1, usrSsn);
+		psmt.setString(1, usrAccount);
 		int result = psmt.executeUpdate();
 
 		if (result > 0)
