@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 public class Administrator {
 	private Connection connection;
 	private String admSsn;
+	
 	private PreparedStatement psmt;
 	private Statement stmt;
 	private ResultSet rs;
@@ -21,7 +22,7 @@ public class Administrator {
 
 	// print adiministrator's branch information
 	public void printBranchInfo() throws SQLException {
-		String sql = "SELECT Branch_name, Address FROM Branch where Branch_num = Bnum AND Adm_ssn = ?";
+		String sql = "SELECT Branch_name, Address FROM Branch, Administrator WHERE Branch_num = Bnum AND Adm_ssn = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, admSsn);
 		rs = psmt.executeQuery();
@@ -71,15 +72,15 @@ public class Administrator {
 
 	// print client's account information
 	public void showClientAccount(String usrSsn) throws SQLException {
-		String sql = "SELECT Account_num, Account_type, Created_date, Money FROM Account where Adm_ssn = Assn AND Ussn = ?";
+		String sql = "SELECT Account_num, Account_type, Created_date, Money FROM Account, Administrator where Adm_ssn = Assn AND Ussn = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
 		while (rs.next()) {
 			String accountNum = rs.getString("Account_num");
 			String accountType = rs.getString("Account_type");
-			String createdDate = String.valueOf(rs.getTime(5));
-			String money = String.valueOf(rs.getInt(6));
+			String createdDate = String.valueOf(rs.getTime("Created_date"));
+			String money = String.valueOf(rs.getInt("Money"));
 			System.out.println("Account_num : " + accountNum + " Account_type : " + accountType + " Created_date : "
 					+ createdDate + " Balance : " + money);
 		}

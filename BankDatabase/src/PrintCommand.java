@@ -41,7 +41,6 @@ public class PrintCommand {
 		System.out.println("1. deposit");
 		System.out.println("2. withdraw");
 		System.out.println("3. remittance");
-		System.out.println("4. Balance");
 	}
 
 	// print list of loan
