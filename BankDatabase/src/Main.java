@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Connection connection;
+		Connection connection = null;
 		Statement statement;
 		ResultSet resultSet;
 		
@@ -22,9 +22,18 @@ public class Main {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(url, user, password);
 			System.out.println("connected");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("driver loading failed");
+		} catch (SQLException e) {
+			System.out.println("connection failed");
+		} finally {
+			try {
+				if (connection != null && !connection.isClosed()) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
