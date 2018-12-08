@@ -6,6 +6,7 @@ public class PrintCommand {
 	
 	// print who want to do
 	public void printWorkList() {
+		System.out.println();
 		System.out.println("0. Exit");
 		System.out.println("1. Administrator");
 		System.out.println("2. Client");
@@ -14,6 +15,7 @@ public class PrintCommand {
 
 	// print administrator work
 	public void printAdminList() {
+		System.out.println();
 		System.out.println(returnPrev);
 		System.out.println("1. Branch information");
 		System.out.println("2. Admin Client Account");
@@ -22,6 +24,7 @@ public class PrintCommand {
 
 	// print detail work of administrator
 	public void printAdminAccount() {
+		System.out.println();
 		System.out.println(returnPrev);
 		System.out.println("1. Add Client");
 		System.out.println("2. Delete Client Account");
@@ -32,6 +35,7 @@ public class PrintCommand {
 
 	// print request of client
 	public void printclientList() {
+		System.out.println();
 		System.out.println(returnPrev);
 		System.out.println("1. Show my information");
 		System.out.println("2. Show my account");
@@ -43,6 +47,7 @@ public class PrintCommand {
 
 	// print list of activity associated with money
 	public void printMoneyList() {
+		System.out.println();
 		System.out.println(returnPrev);
 		System.out.println("1. Deposit");
 		System.out.println("2. Withdraw");
@@ -52,6 +57,7 @@ public class PrintCommand {
 
 	// print list of loan
 	public void printLoanList() {
+		System.out.println();
 		System.out.println(returnPrev);
 		System.out.println("1. Show loan information");
 		System.out.println("2. Get loan");

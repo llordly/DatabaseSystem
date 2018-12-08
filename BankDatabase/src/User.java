@@ -35,7 +35,7 @@ public class User {
 
 	// check whether account exists
 	public boolean checkAccount(String account) throws SQLException {
-		String sql = "SELECT count(*) FROM Account WHERE Usr_ssn = ? AND Account_num = ?";
+		String sql = "SELECT count(*) FROM Account WHERE Ussn = ? AND Account_num = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		psmt.setString(2, account);
@@ -56,7 +56,8 @@ public class User {
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
-
+		rs.next();
+		
 		String fName = rs.getString("Fname");
 		String lName = rs.getString("Lname");
 		String phoneNum = rs.getString("Phone_num");
@@ -103,27 +104,26 @@ public class User {
 
 	// deposit money to usr account
 	public boolean deposit(int amount, String accountNum) throws SQLException {
-
-		String query1 = "UPDATE Account SET Money = Money + ? WHERE Usr_ssn = ? AND Account_num = ?";
+		String query1 = "UPDATE Account SET Money = Money + ? WHERE Account_num = ?";
 		psmt = connection.prepareStatement(query1);
 		psmt.setInt(1, amount);
-		psmt.setString(2, usrSsn);
-		psmt.setString(3, accountNum);
-
+		psmt.setString(2, accountNum);
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
 
 		// count number of transaction
-		String query2 = "SELECT count(*) FROM Money WHERE Account_num = ?";
+		String query2 = "SELECT count(*) FROM Money WHERE Anum = ?";
 		psmt = connection.prepareStatement(query2);
 		psmt.setString(1, accountNum);
 		rs = psmt.executeQuery();
-		int count = rs.getInt(1);
+		rs.next();
+		
+		int count = rs.getInt(1) + 1;
 
 		// insert deposit transaction
 		String query3 = "INSERT INTO Money values(?, ?, ?, ?)";
-		psmt = connection.prepareStatement(query2);
+		psmt = connection.prepareStatement(query3);
 		psmt.setInt(1, count);
 		psmt.setString(2, accountNum);
 		psmt.setInt(3, amount);
@@ -132,7 +132,6 @@ public class User {
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
-
 		return true;
 	}
 
@@ -144,30 +143,33 @@ public class User {
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, accountNum);
 		rs = psmt.executeQuery();
+		rs.next();
+		
 		int balance = rs.getInt(1);
 		if (balance - amount < 0)
 			return false;
 
-		String query1 = "UPDATE Account SET Money = Money - ? WHERE Usr_ssn = ? AND Account_num = ?";
+		String query1 = "UPDATE Account SET Money = Money - ? WHERE Account_num = ?";
 		psmt = connection.prepareStatement(query1);
 		psmt.setInt(1, amount);
-		psmt.setString(2, usrSsn);
-		psmt.setString(3, accountNum);
+		psmt.setString(2, accountNum);
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
 
 		// count number of transaction
-		String query2 = "SELECT count(*) FROM Money WHERE Account_num = ?";
+		String query2 = "SELECT count(*) FROM Money WHERE Anum = ?";
 		psmt = connection.prepareStatement(query2);
 		psmt.setString(1, accountNum);
 		rs = psmt.executeQuery();
-		int count = rs.getInt(1);
+		rs.next();
+		
+		int count = rs.getInt(1) + 1;
 
 		// insert withdraw transaction
 		String query3 = "INSERT INTO Money values(?, ?, ?, ?)";
-		psmt = connection.prepareStatement(query2);
+		psmt = connection.prepareStatement(query3);
 		psmt.setInt(1, count);
 		psmt.setString(2, accountNum);
 		psmt.setInt(3, amount);
@@ -188,26 +190,29 @@ public class User {
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, fromAccount);
 		rs = psmt.executeQuery();
+		rs.next();
+		
 		int balance = rs.getInt(1);
 		if (balance - amount < 0)
 			return false;
 
-		String fromQuery1 = "UPDATE Account SET Money = Money - ? WHERE Usr_ssn = ? AND Account_num = ?";
+		String fromQuery1 = "UPDATE Account SET Money = Money - ? WHERE Account_num = ?";
 		psmt = connection.prepareStatement(fromQuery1);
 		psmt.setInt(1, amount);
-		psmt.setString(2, usrSsn);
-		psmt.setString(3, fromAccount);
+		psmt.setString(2, fromAccount);
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
 
 		// count number of transaction
-		String fromQuery2 = "SELECT count(*) FROM Money WHERE Account_num = ?";
+		String fromQuery2 = "SELECT count(*) FROM Money WHERE Anum = ?";
 		psmt = connection.prepareStatement(fromQuery2);
 		psmt.setString(1, fromAccount);
 		rs = psmt.executeQuery();
-		int fromCount = rs.getInt(1);
+		rs.next();
+		
+		int fromCount = rs.getInt(1) + 1;
 
 		// insert remittance transaction
 		String fromQuery3 = "INSERT INTO Money values(?, ?, ?, ?)";
@@ -221,28 +226,29 @@ public class User {
 			return false;
 		}
 
-		String toQuery1 = "UPDATE Account SET Money = Money + ? WHERE Usr_ssn = ? AND Account_num = ?";
+		String toQuery1 = "UPDATE Account SET Money = Money + ? WHERE Account_num = ?";
 		psmt = connection.prepareStatement(toQuery1);
 		psmt.setInt(1, amount);
-		psmt.setString(2, usrSsn);
-		psmt.setString(3, toAccount);
+		psmt.setString(2, toAccount);
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;
 		}
 
 		// count number of transaction
-		String toQuery2 = "SELECT count(*) FROM Money WHERE Account_num = ?";
+		String toQuery2 = "SELECT count(*) FROM Money WHERE Anum = ?";
 		psmt = connection.prepareStatement(toQuery2);
 		psmt.setString(1, toAccount);
 		rs = psmt.executeQuery();
-		int toCount = rs.getInt(1);
+		rs.next();
+		
+		int toCount = rs.getInt(1) + 1;
 
 		// insert remittanced transaction
 		String toQuery3 = "INSERT INTO Money values(?, ?, ?, ?)";
 		psmt = connection.prepareStatement(toQuery3);
 		psmt.setInt(1, toCount);
-		psmt.setString(2, fromAccount);
+		psmt.setString(2, toAccount);
 		psmt.setInt(3, amount);
 		psmt.setString(4, "Remittanced");
 
@@ -255,12 +261,13 @@ public class User {
 
 	// add loan
 	public boolean getLoan(int amount) throws SQLException {
-		String query1 = "SELECT count(*) FROM Loan WHERE Ussn = ?";
+		String query1 = "SELECT count(*) FROM Loan";
 		psmt = connection.prepareStatement(query1);
-		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
-		int count = rs.getInt(1);
-
+		rs.next();
+		
+		int count = rs.getInt(1) + 1;
+		
 		String query2 = "INSERT INTO Loan values(?, ?, ?)";
 		psmt = connection.prepareStatement(query2);
 		psmt.setInt(1, count);
@@ -280,11 +287,14 @@ public class User {
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
+		int count = 0;
 		while (rs.next()) {
+			count++;
 			int loanNum = rs.getInt("Loan_num");
 			int amount = rs.getInt("Amount");
 			System.out.println("Loan_num : " + String.valueOf(loanNum) + " Amount : " + String.valueOf(amount));
 		}
+		if (count == 0) System.out.println("You don't have any loan");
 	}
 
 }

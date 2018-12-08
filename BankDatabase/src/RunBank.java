@@ -129,33 +129,53 @@ public class RunBank {
 						case 1:
 							System.out.println("Type amount of deposit");
 							int depositAmount = Integer.parseInt(keyboard.nextLine());
-							user.deposit(depositAmount, usrAccount);
+							try {
+								user.deposit(depositAmount, usrAccount);
+								System.out.println("money of " + depositAmount + " has been deposited");
+							} catch (Exception e) {
+								System.out.println("deposit failed");
+							}
 							break;
 						case 2:
 							System.out.println("Type amount of withdraw");
 							int withdrawAmount = Integer.parseInt(keyboard.nextLine());
-							user.deposit(withdrawAmount, usrAccount);
+							try {
+								user.withdraw(withdrawAmount, usrAccount);
+								System.out.println("money of " + withdrawAmount + " has been withdrawn");
+							} catch (Exception e) {
+								System.out.println("withdraw failed");
+							}
 							break;
 						case 3:
 							System.out.println("Type amount of remittance");
 							int remittanceAmount = Integer.parseInt(keyboard.nextLine());
 							System.out.println("Type account number of other person");
 							String toAccount = keyboard.nextLine().trim();
-							user.remittance(remittanceAmount, usrAccount, toAccount);
+							try {
+								user.remittance(remittanceAmount, usrAccount, toAccount);
+								System.out.println("money of " + remittanceAmount + " has been remittanced");
+							} catch (Exception e) {
+								System.out.println("remittance failed");
+							}
 							break;
 						}
 						break;
 					case 5:
-						command = Integer.parseInt(keyboard.nextLine());
-						switch (command) {
-						case 0:
-							break;
-						case 1:
-							user.showLoanInfo();
-						case 2:
-							System.out.println("type amount of loan");
-							int amount = Integer.parseInt(keyboard.nextLine());
-							user.getLoan(amount);
+						while(true) {
+							pc.printLoanList();
+							command = Integer.parseInt(keyboard.nextLine());
+							switch (command) {
+							case 0:
+								break;
+							case 1:
+								user.showLoanInfo();
+								break;
+							case 2:
+								System.out.println("type amount of loan");
+								int amount = Integer.parseInt(keyboard.nextLine());
+								user.getLoan(amount);
+								break;
+							}
 						}
 					}
 				}
