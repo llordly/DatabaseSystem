@@ -18,9 +18,10 @@ public class RunBank {
 	}
 	
 	public void run() throws SQLException {
-		pc.printWorkList();
-		
+		String usrAccount;
+		String usrSsn;
 		while(true) {
+			pc.printWorkList();
 			command = Integer.parseInt(keyboard.nextLine());
 			switch (command) {
 			case 0:
@@ -43,35 +44,57 @@ public class RunBank {
 						admin.printBranchInfo();
 						break;
 					case 2:
-						pc.printAdminAccount();
-						command = Integer.parseInt(keyboard.nextLine());
-						System.out.println("type user ssn");
-						String usrSsn = keyboard.nextLine().trim();
-						user = new User(connection, usrSsn);
-						
-						if (!user.checkUser()) break;
-						switch(command) {
-						case 0:
-							break;
-						case 1:
-							System.out.println("type client's account");
-							String usrAccount = keyboard.nextLine().trim();
-							admin.checkAccount(usrAccount);
-							admin.deleteAccount(usrAccount);
-							break;
-						case 2:
-							admin.addAccount(keyboard);
-							break;
-						case 3:
-							admin.showClientAccount(usrSsn);
-							break;
+						while(true) {
+							pc.printAdminAccount();
+							command = Integer.parseInt(keyboard.nextLine());
+							
+							switch(command) {
+							case 0:
+								break;
+							case 1:
+								try {
+									admin.addClient(keyboard);
+								} catch (Exception e) {
+									System.out.println("User information is wrong or you didn't keep form");
+								}
+								break;
+							case 2:
+								System.out.println("type client's account");
+								usrAccount = keyboard.nextLine().trim();
+								if (admin.deleteAccount(usrAccount)) {
+									System.out.println("Deleted");
+								}
+								else {
+									System.out.println("Failed");
+									admin.checkAccount(usrAccount);
+								}
+								break;
+							case 3:
+								System.out.println("type client's ssn");
+								usrSsn = keyboard.nextLine().trim();
+								if (!admin.checkUser(usrSsn)) break;
+								admin.showClientAccount(usrSsn);
+								break;
+							case 4:
+								System.out.println("type client's ssn");
+								usrSsn = keyboard.nextLine().trim();
+								if (!admin.checkUser(usrSsn)) break;
+								System.out.println("type account type ex) Saving or Checking");
+								String accountType = keyboard.nextLine().trim();
+								try {
+									admin.addClientAccount(usrSsn, accountType);
+									System.out.println("Add client is successed");
+								} catch (Exception e) {
+									System.out.println("Failed for unknown reason");
+								}
+								break;
+							}
 						}
-						break;
 					}	
 				}
 			case 2:
 				System.out.println("type your ssn");
-				String usrSsn = keyboard.nextLine().trim();
+				usrSsn = keyboard.nextLine().trim();
 				user = new User(connection, usrSsn);
 				
 				if (!user.checkUser()) break;
@@ -94,7 +117,7 @@ public class RunBank {
 					case 4:
 						// do with money
 						System.out.println("Type your account");
-						String usrAccount = keyboard.nextLine().trim();
+						usrAccount = keyboard.nextLine().trim();
 						
 						if(!user.checkAccount(usrAccount)) break;
 						

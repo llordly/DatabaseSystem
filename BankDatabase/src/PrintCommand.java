@@ -23,37 +23,38 @@ public class PrintCommand {
 	// print detail work of administrator
 	public void printAdminAccount() {
 		System.out.println(returnPrev);
-		System.out.println("1. Delete Client Account");
-		System.out.println("2. Add Client Account");
-		System.out.println("3. show Client Account");
+		System.out.println("1. Add Client");
+		System.out.println("2. Delete Client Account");
+		System.out.println("3. Show Client Account");
+		System.out.println("4. Add Client Account");
 		System.out.println(input);
 	}
 
 	// print request of client
 	public void printclientList() {
 		System.out.println(returnPrev);
-		System.out.println("1. show my information");
-		System.out.println("2. show my account");
-		System.out.println("3. show my card");
-		System.out.println("4. do with money");
-		System.out.println("5. loan service");
+		System.out.println("1. Show my information");
+		System.out.println("2. Show my account");
+		System.out.println("3. Show my card");
+		System.out.println("4. Do with money");
+		System.out.println("5. Loan service");
 		System.out.println(input);
 	}
 
 	// print list of activity associated with money
 	public void printMoneyList() {
 		System.out.println(returnPrev);
-		System.out.println("1. deposit");
-		System.out.println("2. withdraw");
-		System.out.println("3. remittance");
+		System.out.println("1. Deposit");
+		System.out.println("2. Withdraw");
+		System.out.println("3. Remittance");
 		System.out.println(input);
 	}
 
 	// print list of loan
 	public void printLoanList() {
 		System.out.println(returnPrev);
-		System.out.println("1. show loan information");
-		System.out.println("2. get loan");
+		System.out.println("1. Show loan information");
+		System.out.println("2. Get loan");
 		System.out.println(input);
 	}
 }

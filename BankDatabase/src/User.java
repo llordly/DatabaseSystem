@@ -32,23 +32,23 @@ public class User {
 			return false;
 		}
 	}
-	
-	// check whether account exists
-		public boolean checkAccount(String account) throws SQLException {
-			String sql = "SELECT count(*) FROM Account WHERE Usr_ssn = ? AND Account_num = ?";
-			psmt = connection.prepareStatement(sql);
-			psmt.setString(1, usrSsn);
-			psmt.setString(2, account);
-			rs = psmt.executeQuery();
-			rs.next();
 
-			if (rs.getInt(1) > 0)
-				return true;
-			else {
-				System.out.println("There are no one which matched that account");
-				return false;
-			}
+	// check whether account exists
+	public boolean checkAccount(String account) throws SQLException {
+		String sql = "SELECT count(*) FROM Account WHERE Usr_ssn = ? AND Account_num = ?";
+		psmt = connection.prepareStatement(sql);
+		psmt.setString(1, usrSsn);
+		psmt.setString(2, account);
+		rs = psmt.executeQuery();
+		rs.next();
+
+		if (rs.getInt(1) > 0)
+			return true;
+		else {
+			System.out.println("There are no one which matched that account");
+			return false;
 		}
+	}
 
 	// show client information
 	public void showMyInfo() throws SQLException {
@@ -61,7 +61,7 @@ public class User {
 		String lName = rs.getString("Lname");
 		String phoneNum = rs.getString("Phone_num");
 		String sex = rs.getString("Sex");
-		String birthDate = String.valueOf(rs.getTime("Birth_date"));
+		String birthDate = String.valueOf(rs.getDate("Birth_date"));
 
 		System.out.println("Fname : " + fName + " Lname : " + lName + " Phone_num : " + phoneNum + " Sex : " + sex
 				+ " Birth_date : " + birthDate);
@@ -77,7 +77,7 @@ public class User {
 			String admName = rs.getString("Name");
 			String accountNum = rs.getString("Account_num");
 			String accountType = rs.getString("Account_type");
-			String createdDate = String.valueOf(rs.getTime("Created_date"));
+			String createdDate = String.valueOf(rs.getDate("Created_date"));
 			String money = String.valueOf(rs.getInt("Money"));
 			System.out.println("Adm_name : " + admName + " Account_num : " + accountNum + " Account_type : "
 					+ accountType + " Created_date : " + createdDate + " Balance : " + money);
@@ -127,7 +127,7 @@ public class User {
 		psmt.setInt(1, count);
 		psmt.setString(2, accountNum);
 		psmt.setInt(3, amount);
-		psmt.setString(4, "deposit");
+		psmt.setString(4, "Deposit");
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;
@@ -171,7 +171,7 @@ public class User {
 		psmt.setInt(1, count);
 		psmt.setString(2, accountNum);
 		psmt.setInt(3, amount);
-		psmt.setString(4, "withdraw");
+		psmt.setString(4, "Withdraw");
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;
@@ -215,7 +215,7 @@ public class User {
 		psmt.setInt(1, fromCount);
 		psmt.setString(2, fromAccount);
 		psmt.setInt(3, amount);
-		psmt.setString(4, "remittance");
+		psmt.setString(4, "Remittance");
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;
@@ -244,7 +244,7 @@ public class User {
 		psmt.setInt(1, toCount);
 		psmt.setString(2, fromAccount);
 		psmt.setInt(3, amount);
-		psmt.setString(4, "remittanced");
+		psmt.setString(4, "Remittanced");
 
 		if (psmt.executeUpdate() <= 0) {
 			return false;

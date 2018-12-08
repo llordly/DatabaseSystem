@@ -20,19 +20,12 @@ public class Main {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(url, user, password);
 			System.out.println("connected");
+			
 		} catch (ClassNotFoundException e) {
 			System.out.println("driver loading failed");
 		} catch (SQLException e) {
 			System.out.println("connection failed");
-		} finally {
-			try {
-				if (connection != null && !connection.isClosed()) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		
 		// start program
 		RunBank rb = new RunBank(connection);
@@ -50,7 +43,15 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		
+//		finally {
+//			try {
+//				if (connection != null && !connection.isClosed()) {
+//					connection.close();
+//				}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
 	}
 
