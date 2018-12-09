@@ -11,6 +11,12 @@ public class RunBank {
 	Administrator admin;
 	User user;
 	
+	public RunBank(Connection connection, Scanner keyboard) {
+		this.connection = connection;
+		pc = new PrintCommand();
+		this.keyboard = keyboard;
+	}
+	
 	public void run() throws SQLException {
 		while (true) {
 			pc.printWorkList();
@@ -53,12 +59,6 @@ public class RunBank {
 				break;
 			}
 		}
-	}
-
-	public RunBank(Connection connection) {
-		this.connection = connection;
-		pc = new PrintCommand();
-		keyboard = new Scanner(System.in);
 	}
 
 	public boolean runAdmin() throws SQLException {
@@ -190,7 +190,7 @@ public class RunBank {
 			String accountType = keyboard.nextLine().trim();
 			try {
 				admin.addClientAccount(usrSsn, accountType);
-				System.out.println("Add client is successed");
+				System.out.println("Add client account is successed");
 			} catch (Exception e) {
 				System.out.println("Failed for unknown reason");
 			}
@@ -244,6 +244,13 @@ public class RunBank {
 				System.out.println("money of " + remittanceAmount + " has been remittanced");
 			} catch (Exception e) {
 				System.out.println("remittance failed");
+			}
+			break;
+		case 4:
+			try {
+				user.showTransaction(usrAccount);
+			} catch (Exception e) {
+				System.out.println("Failed for unknown reason");
 			}
 			break;
 		default:

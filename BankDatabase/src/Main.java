@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class Main {
 
@@ -12,9 +13,16 @@ public class Main {
 		Connection connection = null;
 		
 		String driverName = "com.mysql.cj.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/bank?characterEncoding=UTF-8&serverTimezone=UTC";
+		String url = "jdbc:mysql://localhost:3306/bank?characterEncoding=UTF-8&"
+				+ "serverTimezone=UTC";
 		String user = "root";
 		String password = "0317";
+		
+		Scanner keyboard = new Scanner(System.in);
+		System.out.print("user : ");
+		user = keyboard.nextLine().trim();
+		System.out.print("password : ");
+		password = keyboard.nextLine().trim();
 		
 		try {
 			Class.forName(driverName);
@@ -28,7 +36,7 @@ public class Main {
 		} 
 		
 		// start program
-		RunBank rb = new RunBank(connection);
+		RunBank rb = new RunBank(connection, keyboard);
 		
 		try {
 			rb.run();
@@ -38,21 +46,13 @@ public class Main {
 		
 		// close program
 		try {
-			connection.close();
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-//		finally {
-//			try {
-//				if (connection != null && !connection.isClosed()) {
-//					connection.close();
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-		
+
 	}
 
 }

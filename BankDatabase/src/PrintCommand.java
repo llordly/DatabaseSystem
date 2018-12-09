@@ -52,6 +52,7 @@ public class PrintCommand {
 		System.out.println("1. Deposit");
 		System.out.println("2. Withdraw");
 		System.out.println("3. Remittance");
+		System.out.println("4. Transaction details");
 		System.out.print(input);
 	}
 

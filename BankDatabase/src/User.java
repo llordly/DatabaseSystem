@@ -52,7 +52,7 @@ public class User {
 
 	// show client information
 	public void showMyInfo() throws SQLException {
-		String sql = "SELECT Fname, Lname, Phone_num, Sex, Birth_date FROM User where Usr_ssn = ?";
+		String sql = "SELECT Fname, Lname, Phone_num, Sex, Birth_date FROM User WHERE Usr_ssn = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
@@ -70,7 +70,7 @@ public class User {
 
 	// show client account
 	public void showMyAccount() throws SQLException {
-		String sql = "SELECT Name, Account_num, Account_type, Created_date, Money FROM Account, Administrator where Adm_ssn = Assn AND Ussn = ?";
+		String sql = "SELECT Name, Account_num, Account_type, Created_date, Money FROM Account, Administrator WHERE Adm_ssn = Assn AND Ussn = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
@@ -87,7 +87,7 @@ public class User {
 
 	// show client card
 	public void showMyCard() throws SQLException {
-		String sql = "SELECT Card_num, Valid_year, Valid_month, Card_type, Limits FROM Card, User where Usr_ssn = Ussn AND Ussn = ?";
+		String sql = "SELECT Card_num, Valid_year, Valid_month, Card_type, Limits FROM Card, User WHERE Usr_ssn = Ussn AND Ussn = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
@@ -287,12 +287,33 @@ public class User {
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
+		
 		int count = 0;
 		while (rs.next()) {
 			count++;
 			int loanNum = rs.getInt("Loan_num");
 			int amount = rs.getInt("Amount");
 			System.out.println("Loan_num : " + String.valueOf(loanNum) + " Amount : " + String.valueOf(amount));
+		}
+		if (count == 0) System.out.println("You don't have any loan");
+	}
+	
+	public void showTransaction(String accountNum) throws SQLException {
+		String sql = "SELECT Number, Amount, Money_type "
+				+ "FROM Account, Money "
+				+ "WHERE Anum = Account_num AND Account_num = ? ORDER BY Number";
+		psmt = connection.prepareStatement(sql);
+		psmt.setString(1, accountNum);
+		rs = psmt.executeQuery();
+		
+		int count = 0;
+		while (rs.next()) {
+			count++;
+			int number = rs.getInt("Number");
+			int amount = rs.getInt("Amount");
+			String moneyType = rs.getString("Money_type");
+			System.out.println("Number : " + number + " Amount : " + amount
+					+ " Transaction Type : " + moneyType);
 		}
 		if (count == 0) System.out.println("You don't have any loan");
 	}

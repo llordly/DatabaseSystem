@@ -101,7 +101,8 @@ public class Administrator {
 	// add client
 	public boolean addClient(Scanner sc) throws SQLException, NoSuchElementException {
 		System.out.println("type client information separated by space");
-		System.out.println("ex) Usr_ssn Fname Lname Phone_num Sex Birth_date");
+		System.out.println("info) Usr_ssn Fname Lname Phone_num Sex Birth_date");
+		System.out.println("ex) 1234567 Ryu Jibeom 01093976864 M 1998-07-15");
 		String keyBoard = sc.nextLine();
 		StringTokenizer st = new StringTokenizer(keyBoard);
 		
@@ -124,27 +125,41 @@ public class Administrator {
 
 	// print client's account information
 	public void showClientAccount(String usrSsn) throws SQLException {
-		String sql = "SELECT Account_num, Account_type, Created_date, Money FROM Account, Administrator where Adm_ssn = Assn AND Ussn = ?";
+		String sql = "SELECT Branch_name, Account_num, Account_type, Created_date, Money "
+				+ "FROM Account, Administrator, Branch "
+				+ "WHERE Adm_ssn = Assn AND Bnum = Branch_num AND Ussn = ?";
 		psmt = connection.prepareStatement(sql);
 		psmt.setString(1, usrSsn);
 		rs = psmt.executeQuery();
 		while (rs.next()) {
+			String branchName = rs.getString("Branch_name");
 			String accountNum = rs.getString("Account_num");
 			String accountType = rs.getString("Account_type");
 			String createdDate = String.valueOf(rs.getDate("Created_date"));
 			String money = String.valueOf(rs.getInt("Money"));
-			System.out.println("Account_num : " + accountNum + " Account_type : " + accountType + " Created_date : "
+			System.out.println("Branch_name : " + branchName +" Account_num : " + accountNum
+					+ " Account_type : " + accountType + " Created_date : "
 					+ createdDate + " Balance : " + money);
 		}
 	}
 
 	public boolean addClientAccount(String usrSsn, String accountType) throws SQLException {
-		String query1 = "SELECT Account_num FROM Account ORDER BY Account_num DESC";
-		stmt = connection.createStatement();
-		rs = stmt.executeQuery(query1);
+		int lastAccount = 0;
+		String sql = "SELECT count(*) FROM Account";
+		psmt = connection.prepareStatement(sql);
+		rs = psmt.executeQuery();
 		rs.next();
-		int lastAccount = Integer.parseInt(rs.getString("Account_num"));
-		lastAccount += 1;
+
+		if (rs.getInt(1) == 0) lastAccount += 1;
+		else {
+			String query1 = "SELECT Account_num FROM Account ORDER BY Account_num DESC";
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(query1);
+			rs.next();
+			
+			lastAccount = Integer.parseInt(rs.getString("Account_num"));
+			lastAccount += 1;
+		}
 		
 		String query2 = "INSERT INTO Account values(?, ?, ?, ?, ?, 0)";
 		
