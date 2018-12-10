@@ -13,16 +13,20 @@ public class Main {
 		Connection connection = null;
 		
 		String driverName = "com.mysql.cj.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/bank?characterEncoding=UTF-8&"
-				+ "serverTimezone=UTC";
 		String user = "root";
 		String password = "0317";
+		String portNum = "3306";
 		
 		Scanner keyboard = new Scanner(System.in);
+		System.out.print("port number : ");
+		portNum = keyboard.nextLine().trim();
 		System.out.print("user : ");
 		user = keyboard.nextLine().trim();
 		System.out.print("password : ");
 		password = keyboard.nextLine().trim();
+		
+		String url = "jdbc:mysql://localhost:" + portNum + "/bank?characterEncoding=UTF-8&"
+				+ "serverTimezone=UTC";
 		
 		try {
 			Class.forName(driverName);

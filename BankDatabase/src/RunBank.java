@@ -152,6 +152,7 @@ public class RunBank {
 		case 1:
 			try {
 				admin.addClient(keyboard);
+				System.out.println("Add Client is successed");
 			} catch (Exception e) {
 				System.out.println("User information is wrong or you didn't keep form");
 			}
