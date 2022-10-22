@@ -10,7 +10,7 @@
 
 - 은행의 DB를 관리하기 위한 DBMS이다.
 - 은행의 DB는 DB Project 1, 2, 3에서 한 요구사항 분석, Er-diagram, Relational-model을 기반으로 스키마를 만들었다. 스키마는 아래의 Relational-model을 따라 만들었으며, 이 모델은 Project3에서 중복된 Attribute를 제거하고 만든 모델이다(Functional Dependency를 고려하여)
-- <img src="file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image001.png" alt="img" style="zoom:60%;" />
+- <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/schema.png?raw=true" alt="img" style="zoom:60%;" />
 
 
 
