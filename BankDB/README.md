@@ -1,4 +1,4 @@
-# <center>Project 4: DBMS 프로그램 개발</center>
+# <center>Project 4: DBMS Program Development</center>
 
  
 
@@ -134,187 +134,60 @@
 - 프로그램 실행을 위해 각 테이블별로 5~15개정도의 데이터를 제약조건에 위배되지 않도록 넣었다.
 
 - 실행 화면  
-  - <img src="file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image035.png" alt="img" style="zoom:70%;" />
+
   - 사용자와 비밀번호를 받으면 연결되고 처음 화면이 나온다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe1.png?raw=true" alt="img" style="zoom:50%;" />
+  - Administrator로 접속한 경우이다. 관리자 Ssn이 틀렸을 경우 접속할 수 없고 다시 메인 화면으로 돌아온다. 접속에 성공했을 경우 관리자 메뉴가 나오고 커맨드를 받을 수 있도록 했다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe2.png?raw=true' style="zoom:50%;" >
 
+  - 관리자가 속해 있는 지점의 정보를 보고 싶을 경우 1을 입력하면 되고 그 결과가 나온다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe3.png?raw=true' style="zoom:50%;" >
+  - 사용자를 관리하고 싶을 경우 2를 입력한다. 이 경우 사용자 관리 모드로 들어가게 된다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe4.png?raw=true' style="zoom:50%;" >
+  - 사용자를 추가하고 싶을 경우 1을 입력하고 양식에 맞게 사용자의 정보를 입력하면 추가가 완료된다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe5.png?raw=true' style="zoom:50%;" >
 
+  - 2를 입력하면 사용자의 계좌를 삭제할 수 있고 올바르지 않은 계좌를 입력할 경우 없는 계좌라는 경고를 띄워준다. 삭제가 완료되면 Deleted라는 메시지가 출력된다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe6.png?raw=true' style="zoom:50%;" >
 
- 
+  - 3을 입력하면 사용자의 계좌를 볼 수 있고, 존재하는 사용자를 입력했을 때 사용자가 가진 모든 계좌의 정보를 보여준다. 계좌가 없을 경우엔 출력하지 않는다. 잘못된 계좌일 경우 경고 메시지를 띄운다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe7.png?raw=true' style="zoom:50%;" >
 
- 
+  - 4를 입력할 경우 사용자의 ssn을 입력하라고 하고 Saving계좌인지 Checking계좌인지 여부를 묻고 해당 계좌를 생성해준다. 이 경우 예금액은 0원으로 설정된다. 완료되면 완료 메시지를 출력한다. 다음은 생성하고, 그 결과를 확인한 것이다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe8.png?raw=true' style="zoom:50%;" >
 
-​              ii.     Administrator로 접속한 경우이다. 관리자 Ssn이 틀렸을 경우 접속할 수 없고 다시 메인 화면으로 돌아온다. 접속에 성공했을 경우 관리자 메뉴가 나오고 커맨드를 받을 수 있도록 했다.
+  - 다음은 사용자에 접속하는 화면이다. 올바른 사용자의 Ssn을 입력했을 경우에만 사용자 모드를 실행할 수 있다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe9.png?raw=true' style="zoom:50%;" >
 
-​             iii.      
+  - 1번을 입력하면 접속한 사용자의 정보를 출력한다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe10.png?raw=true" style="zoom:50%;" >
 
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image036.png) |
+  - 2번을 입력하면 접속한 사용자의 모든 계좌의 정보를 출력한다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe11.png?raw=true' style="zoom:50%;" >
 
+  - 3번을 입력하면 접속한 사용자의 모든 카드 정보를 출력한다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe12.png?raw=true" style="zoom:50%;" >
 
-관리자가                ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image037.png)    
- 속해 있는 지점의 정보를 보고 싶을 경우 1을 입력하면 되고 그 결과가 나온다.
+  - 4번을 입력하면 예금, 출금, 송금, 거래 내역과 관련된 서비스를 이용할 수 있는 모드로 넘어간다. 이 경우 내가 가지고 있는 계좌를 입력해야만 서비스를 이용할 수 있다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe13.png?raw=true' style="zoom:50%;" >
 
+  - 1번을 입력하면 입금을 할 수 있고, 원하는 금액을 입금할 수 있다. 입금이 완료되면 완료 메시지가 출력된다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe14.png?raw=true" style="zoom:50%;" >
 
+  - 2번을 입력하면 출금을 할 수 있고, 원하는 금액을 출금할 수 있다. 출금이 완료되면 완료 메시지가 출력된다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe15.png?raw=true' style="zoom:50%;" >
 
-​             iv.      
+  - 3번을 입력하면 송금을 할 수 있고, 원하는 금액을 원하는 계좌에 송금할 수 있다. 송금이 완료되면 완료 메시지가 출력된다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe16.png?raw=true" style="zoom:50%;" >
 
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image038.png) |
+  - 4번을 입력하면 사용자 계좌의  모든 거래 내역을 출력한다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe17.png?raw=true" style="zoom:50%;" >
 
+  - 이전 메뉴로 돌아와서 5번을 입력하면 대출 서비스를 이용할 수 있다. 그 후 1번을 입력하면 사용자의 대출 정보를 보여준다.
+    - <img src='https://github.com/llordly/DatabaseSystem/blob/master/img/exe18.png?raw=true' style="zoom:50%;" >
 
-사용자를 관리하고 싶을 경우 2를 입력한다. 이 경우 사용자 관리 모드로 들어가게 된다.
+  - 2번을 입력하면 대출을 받을 수 있고 입력한 금액만큼 대출받을 수 있다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe19.png?raw=true" style="zoom:50%;" >
 
-
-
-
-
- 
-
-​              v.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image039.png) |
-
-
-사용자를 추가하고 싶을 경우 1을 입력하고 양식에 맞게 사용자의 정보를 입력하면 추가가 완료된다.
-
-
-
-​             vi.     2를 입력하면 사용자의 계좌를 삭제할 수 있고 올바르지 않은 계좌를 입력할 경우 없는 계좌라는 경고를 띄워준다. 삭제가 완료되면 Deleted라는 메시지가 출력된다.
-
-​            vii.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image040.png) |
-
-
-3을 입력하면 사용자의 계좌를 볼 수 있고, 존재하는 사용자를 입력했을 때 사용자가 가진 모든 계좌의 정보를 보여준다. 계좌가 없을 경우엔 출력하지 않는다. 잘못된 계좌일 경우 경고 메시지를 띄운다.
-
-
-
-​            viii.     ![img]()
- 4를 입력할 경우 사용자의 ssn을 입력하라고 하고 Saving계좌인지 Checking계좌인지 여부를 묻고 해당 계좌를 생성해준다. 이 경우 예금액은 0원으로 설정된다. 완료되면 완료 메시지를 출력한다. 다음은 생성하고, 그 결과를 확인한 것이다.
-
-​             ix.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image043.png) |
-
-
-다음은 사용자에 접속하는 화면이다. 올바른 사용자의 Ssn을 입력했을 경우에만 사용자 모드를 실행할 수 있다.
-
-
-
-​              x.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image044.png) |
-
-
-1번을 입력하면 접속한 사용자의 정보를 출력한다.
-
-
-
-​             xi.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image045.png) |
-
-
-2번을 입력하면 접속한 사용자의 모든 계좌의 정보를 출력한다.
-
-
-
-
-
- 
-
-​            xii.     3번을 입력하면 접속한 사용자의 모든 카드 정보를 출력한다.
-
-​            xiii.     ![img]()
- 4번을 입력하면 예금, 출금, 송금, 거래 내역과 관련된 서비스를 이용할 수 있는 모드로 넘어간다. 이 경우 내가 가지고 있는 계좌를 입력해야만 서비스를 이용할 수 있다.
-
-
-
- 
-
-​            xiv.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image048.png) |
-
-
-1번을 입력하면 입금을 할 수 있고, 원하는 금액을 입금할 수 있다. 입금이 완료되면 완료 메시지가 출력된다.
-
-
-
-​            xv.     2번을 입력하면 출금을 할 수 있고, 원하는 금액을 출금할 수 있다. 출금이 완료되면 완료 메시지가 출력된다.
-
-​            xvi.      
-
-|      |          |
-| ---- | -------- |
-|      | ![img]() |
-
-
-3번을 입력하면 송금을 할 수 있고, 원하는 금액을 원하는 계좌에 송금할 수 있다. 송금이 완료되면 완료 메시지가 출력된다.
-
-
-
-
-
- 
-
-​           xvii.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image051.png) |
-
-
-4번을 입력하면 사용자 계좌의  모든 거래 내역을 출력한다.
-
-
-
-​           xviii.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image052.png) |
-
-
-이전 메뉴로 돌아와서 5번을 입력하면 대출 서비스를 이용할 수 있다. 그 후 1번을 입력하면 사용자의 대출 정보를 보여준다.
-
-
-
-​            xix.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image053.png) |
-
-
-2번을 입력하면 대출을 받을 수 있고 입력한 금액만큼 대출받을 수 있다.
-
-
-
-
-
- 
-
-​             xx.      
-
-|      |                                                              |
-| ---- | ------------------------------------------------------------ |
-|      | ![img](file:////Users/lordly/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image054.png) |
-
-
-다시 메인 메뉴로 돌아와 0번을 누르면 프로그램이 Exit 메시지와 함께 종료된다.
+  - 다시 메인 메뉴로 돌아와 0번을 누르면 프로그램이 Exit 메시지와 함께 종료된다.
+    - <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/exe20.png?raw=true" style="zoom:50%;" >

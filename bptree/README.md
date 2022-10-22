@@ -401,7 +401,7 @@
 
 ## #4 Result
 
-- <img src="/Users/lordly/Desktop/Hanyang/2018_2학기/Database System/bptree_exe.png" alt="bptree_exe" style="zoom:50%;" />
-- <img src="/Users/lordly/Desktop/Hanyang/2018_2학기/Database System/inout.png" alt="inout" style="zoom:50%;" />
+- <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/bptree.png?raw=true" alt="bptree_exe" style="zoom:50%;" />
+- <img src="https://github.com/llordly/DatabaseSystem/blob/master/img/inout.png?raw=true" alt="inout" style="zoom:50%;" />
 
 - max-degree가 8인 tree 를 생성 후, input data를 기반으로 트리를 생성한 후 delete.csv 정보를 기반으로 지우고 output.dat에 출력한 결과
